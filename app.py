@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-from database import add_entry, get_entries
+from database import add_entry, close_connection, create_table, get_entries
+
 
 menu = """Please select an option.
 1) Add new entry
@@ -8,8 +9,6 @@ menu = """Please select an option.
 3) Exit
 
 Option: """
-
-print("Welcome to your journal!")
 
 
 def prompt_new_entry():
@@ -24,6 +23,10 @@ def view_entries():
         print(f"\ndate: {entry['date']}\ncontent: {entry['content']}\n\n")
 
 
+print("Welcome to your journal!")
+create_table()
+
+
 while (user_input := input(menu)) != "3":
     if user_input == "1":
         prompt_new_entry()
@@ -34,4 +37,5 @@ while (user_input := input(menu)) != "3":
     else:
         print("invalid input, please try again")
 
+close_connection()
 print("Goodbye! :)")
